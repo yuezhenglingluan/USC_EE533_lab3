@@ -31,17 +31,19 @@
 // (in parentheses) to your own signal names.
 
 //----------- Begin Cut here for INSTANTIATION Template ---// INST_TAG
-synchronous_memory_9_byte_256_bits YourInstanceName (
-	.clka(clka),
-	.dina(dina), // Bus [71 : 0] 
+dual_core_memory_element YourInstanceName (
 	.addra(addra), // Bus [7 : 0] 
-	.wea(wea), // Bus [0 : 0] 
-	.douta(douta)); // Bus [71 : 0] 
+	.addrb(addrb), // Bus [7 : 0] 
+	.clka(clka),
+	.clkb(clkb),
+	.dina(dina), // Bus [71 : 0] 
+	.doutb(doutb), // Bus [71 : 0] 
+	.wea(wea));
 
 // INST_TAG_END ------ End INSTANTIATION Template ---------
 
-// You must compile the wrapper file synchronous_memory_9_byte_256_bits.v when simulating
-// the core, synchronous_memory_9_byte_256_bits. When compiling the wrapper file, be sure to
+// You must compile the wrapper file dual_core_memory_element.v when simulating
+// the core, dual_core_memory_element. When compiling the wrapper file, be sure to
 // reference the XilinxCoreLib Verilog simulation library. For detailed
 // instructions, please refer to the "CORE Generator Help".
 

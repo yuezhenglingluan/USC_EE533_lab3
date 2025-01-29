@@ -26,8 +26,8 @@
 --     (c) Copyright 1995-2007 Xilinx, Inc.                                   --
 --     All rights reserved.                                                   --
 --------------------------------------------------------------------------------
--- You must compile the wrapper file synchronous_memory_9_byte_256_bits.vhd when simulating
--- the core, synchronous_memory_9_byte_256_bits. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file dual_core_memory_element.vhd when simulating
+-- the core, dual_core_memory_element. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,85 +40,98 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 Library XilinxCoreLib;
 -- synthesis translate_on
-ENTITY synchronous_memory_9_byte_256_bits IS
+ENTITY dual_core_memory_element IS
 	port (
-	clka: IN std_logic;
-	dina: IN std_logic_VECTOR(71 downto 0);
 	addra: IN std_logic_VECTOR(7 downto 0);
-	wea: IN std_logic_VECTOR(0 downto 0);
-	douta: OUT std_logic_VECTOR(71 downto 0));
-END synchronous_memory_9_byte_256_bits;
+	addrb: IN std_logic_VECTOR(7 downto 0);
+	clka: IN std_logic;
+	clkb: IN std_logic;
+	dina: IN std_logic_VECTOR(71 downto 0);
+	doutb: OUT std_logic_VECTOR(71 downto 0);
+	wea: IN std_logic);
+END dual_core_memory_element;
 
-ARCHITECTURE synchronous_memory_9_byte_256_bits_a OF synchronous_memory_9_byte_256_bits IS
+ARCHITECTURE dual_core_memory_element_a OF dual_core_memory_element IS
 -- synthesis translate_off
-component wrapped_synchronous_memory_9_byte_256_bits
+component wrapped_dual_core_memory_element
 	port (
-	clka: IN std_logic;
-	dina: IN std_logic_VECTOR(71 downto 0);
 	addra: IN std_logic_VECTOR(7 downto 0);
-	wea: IN std_logic_VECTOR(0 downto 0);
-	douta: OUT std_logic_VECTOR(71 downto 0));
+	addrb: IN std_logic_VECTOR(7 downto 0);
+	clka: IN std_logic;
+	clkb: IN std_logic;
+	dina: IN std_logic_VECTOR(71 downto 0);
+	doutb: OUT std_logic_VECTOR(71 downto 0);
+	wea: IN std_logic);
 end component;
 
 -- Configuration specification 
-	for all : wrapped_synchronous_memory_9_byte_256_bits use entity XilinxCoreLib.blk_mem_gen_v2_7(behavioral)
+	for all : wrapped_dual_core_memory_element use entity XilinxCoreLib.blkmemdp_v6_3(behavioral)
 		generic map(
-			c_has_regceb => 0,
-			c_has_regcea => 0,
-			c_mem_type => 0,
-			c_prim_type => 1,
-			c_sinita_val => "0",
-			c_read_width_b => 72,
-			c_family => "spartan3",
-			c_read_width_a => 72,
-			c_disable_warn_bhv_coll => 0,
-			c_write_mode_b => "WRITE_FIRST",
-			c_init_file_name => "no_coe_file_loaded",
-			c_write_mode_a => "WRITE_FIRST",
-			c_mux_pipeline_stages => 0,
-			c_has_mem_output_regs_b => 0,
-			c_load_init_file => 0,
-			c_xdevicefamily => "spartan3a",
-			c_has_mem_output_regs_a => 0,
-			c_write_depth_b => 256,
-			c_write_depth_a => 256,
-			c_has_ssrb => 0,
-			c_has_mux_output_regs_b => 0,
-			c_has_ssra => 0,
-			c_has_mux_output_regs_a => 0,
+			c_reg_inputsb => 0,
+			c_reg_inputsa => 0,
+			c_has_ndb => 0,
+			c_has_nda => 0,
+			c_ytop_addr => "1024",
+			c_has_rfdb => 0,
+			c_has_rfda => 0,
+			c_ywea_is_high => 1,
+			c_yena_is_high => 1,
+			c_yclka_is_rising => 1,
+			c_yhierarchy => "hierarchy1",
+			c_ysinita_is_high => 1,
+			c_ybottom_addr => "0",
+			c_width_b => 72,
+			c_width_a => 72,
+			c_sinita_value => "0",
+			c_sinitb_value => "0",
+			c_limit_data_pitch => 18,
+			c_write_modeb => 0,
+			c_write_modea => 0,
+			c_has_rdyb => 0,
+			c_yuse_single_primitive => 0,
+			c_has_rdya => 0,
 			c_addra_width => 8,
 			c_addrb_width => 8,
+			c_has_limit_data_pitch => 0,
 			c_default_data => "0",
-			c_use_ecc => 0,
-			c_algorithm => 1,
-			c_disable_warn_bhv_range => 0,
-			c_write_width_b => 72,
-			c_write_width_a => 72,
-			c_read_depth_b => 256,
-			c_read_depth_a => 256,
-			c_byte_size => 9,
-			c_sim_collision_check => "ALL",
-			c_use_ramb16bwer_rst_bhv => 0,
-			c_common_clk => 0,
-			c_wea_width => 1,
+			c_pipe_stages_b => 0,
+			c_yweb_is_high => 1,
+			c_yenb_is_high => 1,
+			c_pipe_stages_a => 0,
+			c_yclkb_is_rising => 1,
+			c_yydisable_warnings => 1,
+			c_enable_rlocs => 0,
+			c_ysinitb_is_high => 1,
+			c_has_web => 0,
+			c_has_default_data => 1,
+			c_has_sinitb => 0,
+			c_has_wea => 1,
+			c_has_sinita => 0,
+			c_has_dinb => 0,
+			c_has_dina => 1,
+			c_ymake_bmm => 0,
+			c_sim_collision_check => "NONE",
 			c_has_enb => 0,
-			c_web_width => 1,
 			c_has_ena => 0,
-			c_sinitb_val => "0",
-			c_use_byte_web => 0,
-			c_use_byte_wea => 0,
-			c_use_default_data => 0);
+			c_depth_b => 256,
+			c_mem_init_file => "mif_file_16_1",
+			c_depth_a => 256,
+			c_has_doutb => 1,
+			c_has_douta => 0,
+			c_yprimitive_type => "16kx1");
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_synchronous_memory_9_byte_256_bits
+U0 : wrapped_dual_core_memory_element
 		port map (
-			clka => clka,
-			dina => dina,
 			addra => addra,
-			wea => wea,
-			douta => douta);
+			addrb => addrb,
+			clka => clka,
+			clkb => clkb,
+			dina => dina,
+			doutb => doutb,
+			wea => wea);
 -- synthesis translate_on
 
-END synchronous_memory_9_byte_256_bits_a;
+END dual_core_memory_element_a;
 

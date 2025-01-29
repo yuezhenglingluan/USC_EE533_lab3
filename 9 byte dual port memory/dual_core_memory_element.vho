@@ -29,18 +29,20 @@
 -- The following code must appear in the VHDL architecture header:
 
 ------------- Begin Cut here for COMPONENT Declaration ------ COMP_TAG
-component synchronous_memory_9_byte_256_bits
+component dual_core_memory_element
 	port (
-	clka: IN std_logic;
-	dina: IN std_logic_VECTOR(71 downto 0);
 	addra: IN std_logic_VECTOR(7 downto 0);
-	wea: IN std_logic_VECTOR(0 downto 0);
-	douta: OUT std_logic_VECTOR(71 downto 0));
+	addrb: IN std_logic_VECTOR(7 downto 0);
+	clka: IN std_logic;
+	clkb: IN std_logic;
+	dina: IN std_logic_VECTOR(71 downto 0);
+	doutb: OUT std_logic_VECTOR(71 downto 0);
+	wea: IN std_logic);
 end component;
 
 -- Synplicity black box declaration
 attribute syn_black_box : boolean;
-attribute syn_black_box of synchronous_memory_9_byte_256_bits: component is true;
+attribute syn_black_box of dual_core_memory_element: component is true;
 
 -- COMP_TAG_END ------ End COMPONENT Declaration ------------
 
@@ -48,17 +50,19 @@ attribute syn_black_box of synchronous_memory_9_byte_256_bits: component is true
 -- body. Substitute your own instance name and net names.
 
 ------------- Begin Cut here for INSTANTIATION Template ----- INST_TAG
-your_instance_name : synchronous_memory_9_byte_256_bits
+your_instance_name : dual_core_memory_element
 		port map (
-			clka => clka,
-			dina => dina,
 			addra => addra,
-			wea => wea,
-			douta => douta);
+			addrb => addrb,
+			clka => clka,
+			clkb => clkb,
+			dina => dina,
+			doutb => doutb,
+			wea => wea);
 -- INST_TAG_END ------ End INSTANTIATION Template ------------
 
--- You must compile the wrapper file synchronous_memory_9_byte_256_bits.vhd when simulating
--- the core, synchronous_memory_9_byte_256_bits. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file dual_core_memory_element.vhd when simulating
+-- the core, dual_core_memory_element. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
