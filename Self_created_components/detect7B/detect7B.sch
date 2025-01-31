@@ -1,6 +1,6 @@
 VERSION 6
 BEGIN SCHEMATIC
-    BEGIN ATTR DeviceFamilyName "spartan3a"
+    BEGIN ATTR DeviceFamilyName "virtex2p"
         DELETE all:0
         EDITNAME all:0
         EDITTRAIT all:0
@@ -8,30 +8,22 @@ BEGIN SCHEMATIC
     BEGIN NETLIST
         SIGNAL pipe1(71:0)
         SIGNAL pipe0(71:0)
-        SIGNAL XLXN_14
-        SIGNAL XLXN_15
         SIGNAL mrst
         SIGNAL XLXN_18
-        SIGNAL XLXN_19
         SIGNAL clk
-        SIGNAL XLXN_21
-        SIGNAL XLXN_22
         SIGNAL ce
         SIGNAL XLXN_25(111:0)
         SIGNAL pipe0(47:0)
         SIGNAL pipe1(63:0)
         SIGNAL hwregA(55:0)
         SIGNAL hwregA(62:56)
-        SIGNAL XLXN_47
         SIGNAL XLXN_49
         SIGNAL match
-        SIGNAL XLXN_51
         SIGNAL XLXN_46
-        SIGNAL XLXN_53
         SIGNAL match_en
-        SIGNAL XLXN_56
         SIGNAL hwregA(63:0)
         PORT Input pipe1(71:0)
+        PORT Output pipe0(71:0)
         PORT Input mrst
         PORT Input clk
         PORT Input ce
@@ -150,9 +142,6 @@ BEGIN SCHEMATIC
         IOMARKER 448 272 pipe1(71:0) R180 28
         BEGIN BRANCH pipe0(71:0)
             WIRE 1072 272 1200 272
-            BEGIN DISPLAY 1200 272 ATTR Name
-                ALIGNMENT SOFT-LEFT
-            END DISPLAY
         END BRANCH
         BEGIN BRANCH mrst
             WIRE 480 1360 720 1360
@@ -251,5 +240,6 @@ BEGIN SCHEMATIC
             END DISPLAY
         END BRANCH
         IOMARKER 288 1712 hwregA(63:0) R180 28
+        IOMARKER 1200 272 pipe0(71:0) R0 28
     END SHEET
 END SCHEMATIC

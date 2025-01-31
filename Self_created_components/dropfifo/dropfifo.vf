@@ -7,7 +7,7 @@
 // \   \   \/     Version : 10.1
 //  \   \         Application : sch2verilog
 //  /   /         Filename : dropfifo.vf
-// /___/   /\     Timestamp : 01/28/2025 21:37:20
+// /___/   /\     Timestamp : 01/31/2025 00:00:27
 // \   \  /  \ 
 //  \___\/\___\ 
 //
@@ -519,13 +519,6 @@ module dropfifo(clk,
    wire [71:0] XLXN_48;
    wire XLXN_49;
    
-   dual_core_memory_element XLXI_1 (.addra(waddr[7:0]), 
-                                    .addrb(raddr[7:0]), 
-                                    .clka(clk), 
-                                    .clkb(clk), 
-                                    .dina(XLXN_48[71:0]), 
-                                    .wea(XLXN_47), 
-                                    .doutb(out_fifo[71:0]));
    FD XLXI_2 (.C(clk), 
               .D(firstword), 
               .Q(XLXN_23));
@@ -591,4 +584,11 @@ module dropfifo(clk,
                   .d(in_fifo[71:0]), 
                   .q(XLXN_48[71:0]));
    VCC XLXI_16 (.P(XLXN_49));
+   dual_core_memory_element XLXI_17 (.addra(waddr[7:0]), 
+                                     .addrb(raddr[7:0]), 
+                                     .clka(clk), 
+                                     .clkb(clk), 
+                                     .dina(XLXN_48[71:0]), 
+                                     .wea(XLXN_47), 
+                                     .doutb(out_fifo[71:0]));
 endmodule
